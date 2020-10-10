@@ -1,4 +1,4 @@
-package org.liaonau.words.client.service;
+package org.liaonau.task.client.service;
 
 import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,11 @@
-package org.liaonau.words.client;
+package org.liaonau.task.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WordsClientApp {
+public class ClientApplication {
     public static void main(String[] args) {
-        SpringApplication.run(WordsClientApp.class, args);
+        SpringApplication.run(ClientApplication.class, args);
     }
 }

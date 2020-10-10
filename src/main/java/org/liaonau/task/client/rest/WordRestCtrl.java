@@ -1,7 +1,7 @@
-package org.liaonau.words.client.rest;
+package org.liaonau.task.client.rest;
 
-import org.liaonau.words.client.model.AddWordRq;
-import org.liaonau.words.client.service.WordProducerService;
+import org.liaonau.task.client.model.AddWordRq;
+import org.liaonau.task.client.service.WordProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/")
 @CrossOrigin(origins = "*")
 @Validated
-public class WordsClientCtrl {
+public class WordRestCtrl {
 
     private WordProducerService wordService;
 

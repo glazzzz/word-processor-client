@@ -1,4 +1,4 @@
-package org.liaonau.words.client.camel;
+package org.liaonau.task.client.camel;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
