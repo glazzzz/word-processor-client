@@ -1,5 +1,13 @@
 package org.liaonau.task.client.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.liaonau.task.client.model.AddWordRq;
 import org.liaonau.task.client.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +30,29 @@ public class WordRestCtrl {
     }
 
     @PostMapping(path = "/word")
+    @Operation(summary = "Add word to processing queue", description = "Add word to processing queue",
+    responses = {
+        @ApiResponse(responseCode = "200", description = "Word successfully sent to processing queue"),
+//        @ApiResponse(responseCode = "400", description = "Word should be alphanumeric")
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json", examples = {
+            @ExampleObject(summary = "Request to add word to sentence", name = "Request", value = "{\"word\":\"Hello\"}"
+            )
+    }))
     public void addWord(@RequestBody @Validated AddWordRq addWordRequest) {
         wordService.send(addWordRequest.getWord());
     }
 
     @GetMapping(path = "/word")
+    @Operation(summary = "Search for word", description = "Search for word in existing sentences",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "All sentences that contain required word in JSON format",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = List.class))),
+//                    @ApiResponse(responseCode = "400", description = "Word should be alphanumeric")
+            })
+    @Parameters({
+            @Parameter(name = "text", in = ParameterIn.QUERY, description = "search request")
+    })
     public List<String> findWord(@RequestParam String text) {
         return wordService.search(text);
     }
