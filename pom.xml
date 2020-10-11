@@ -43,6 +43,24 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-elasticsearch-rest-starter</artifactId>
+            <version>${version.camel-core}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-direct-starter</artifactId>
+            <version>${version.camel-core}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring</artifactId>
             <version>${version.camel-core}</version>

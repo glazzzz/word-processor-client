@@ -1,10 +1,12 @@
 package org.liaonau.task.client.rest;
 
 import org.liaonau.task.client.model.AddWordRq;
-import org.liaonau.task.client.service.WordProducerService;
+import org.liaonau.task.client.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/")
@@ -12,15 +14,20 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class WordRestCtrl {
 
-    private WordProducerService wordService;
+    private WordService wordService;
 
     @Autowired
-    public void setWordService(WordProducerService wordService) {
+    public void setWordService(WordService wordService) {
         this.wordService = wordService;
     }
 
     @PostMapping(path = "/word")
     public void addWord(@RequestBody @Validated AddWordRq addWordRequest) {
-        wordService.send("{{consumer.kafka-uri}}", addWordRequest.getWord());
+        wordService.send(addWordRequest.getWord());
+    }
+
+    @GetMapping(path = "/word")
+    public List<String> findWord(@RequestParam String text) {
+        return wordService.search(text);
     }
 }
