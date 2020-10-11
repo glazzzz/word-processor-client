@@ -11,9 +11,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.liaonau.task.client.model.AddWordRq;
 import org.liaonau.task.client.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -40,6 +43,9 @@ public class WordRestCtrl {
             )
     }))
     public void addWord(@RequestBody @Validated AddWordRq addWordRequest) {
+        if (!wordService.isWordValid(addWordRequest.getWord())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Word must be alphanumeric");
+        }
         wordService.send(addWordRequest.getWord());
     }
 
@@ -53,7 +59,10 @@ public class WordRestCtrl {
     @Parameters({
             @Parameter(name = "text", in = ParameterIn.QUERY, description = "search request")
     })
-    public List<String> findWord(@RequestParam String text) {
+    public List<String> findWord(@RequestParam @NotNull String text) {
+        if (!wordService.isWordValid(text)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Word must be alphanumeric");
+        }
         return wordService.search(text);
     }
 }

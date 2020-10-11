@@ -6,6 +6,7 @@ import org.elasticsearch.search.SearchHits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -52,5 +53,9 @@ public class WordService {
         return Arrays.stream(searchHits.getHits())
                 .map(SearchHit::getSourceAsString)
                 .collect(Collectors.toList());
+    }
+
+    public boolean isWordValid(@NotNull  String word){
+        return !word.matches("^.*[^a-zA-Z0-9 ].*$");
     }
 }
