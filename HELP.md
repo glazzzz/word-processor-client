@@ -5,4 +5,8 @@ Please build docker image in case if you are planning to use Docker to launch sy
  
  ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=words/client
  
+ Then check if you already build image for processing module from https://github.com/glazzzz/word-processor and follow instructions from https://github.com/glazzzz/word-to-sentence-procesor
+ 
+ 
+ 
  
